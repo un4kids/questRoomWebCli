@@ -1,52 +1,48 @@
-<nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-  >
-    <div class="sidebar-logo">
-      <a href="/monitor">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-        <h1>Quest Room Ctrl</h1>
-      </a>
+<nz-layout>
+  <nz-content>
+    <div class="inner-content">
+      <div>
+        <router-outlet> </router-outlet>
+      </div>
     </div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-    >
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/monitor">Monitor</a>            
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/control">Control</a>
-          </li>
-        </ul>
-      </li>
+  </nz-content>
+  <nz-footer>
+    <ul nz-menu nzTheme="dark"  nzMode="horizontal">
+      <button
+        
+        class="start-bttn"
+        nz-button
+        nzType="primary"
+        (click)="loadTwo()"
+        [nzLoading]="isLoadingTwo"
+        nzShape="round"
+      >
+        <i nz-icon nzType="play-circle"></i>START
+      </button>
+      <div class="divider"></div>
+      <button
+        class="pause-bttn"
+        nz-button
+        nzType="primary"
+        (click)="loadTwo()"
+        [nzLoading]="isLoadingTwo"
+        nzShape="round"
+      >
+        <i nz-icon nzType="pause-circle"></i>PAUSE
+      </button>
+      <div class="divider"></div>
+      <button
+        class="stop-bttn"
+        nz-button
+        nzType="dashed"
+        nzDanger
+        (click)="loadTwo()"
+        [nzLoading]="isLoadingTwo"
+        nzShape="round"
+        nzDanger
+      >
+        <i nz-icon nzType="poweroff"></i>STOP
+      </button>
     </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <i
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></i>
-        </span>
-      </div>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-  </nz-layout>
+  </nz-footer>
 </nz-layout>
