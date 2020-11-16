@@ -1,49 +1,4 @@
 <nz-layout>
-  <nz-header>
-
-     <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <nz-space [nzSize]="spaceBetweenBttn">
-        <nz-space-item>
-          <button
-            class="start-bttn"
-            nz-button
-            nzType="primary"
-            (click)="loadTwo()"
-            [nzLoading]="isLoadingTwo"
-            nzShape="round"
-          >
-            <i nz-icon nzType="play-circle"></i>START
-          </button>
-        </nz-space-item>
-        <nz-space-item>
-          <button
-            class="pause-bttn"
-            nz-button
-            nzType="primary"
-            (click)="loadTwo()"
-            [nzLoading]="isLoadingTwo"
-            nzShape="round"
-          >
-            <i nz-icon nzType="pause-circle"></i>PAUSE
-          </button>
-        </nz-space-item>
-        <nz-space-item>
-          <button
-            class="stop-bttn"
-            nz-button
-            nzType="dashed"
-            nzDanger
-            (click)="loadTwo()"
-            [nzLoading]="isLoadingTwo"
-            nzShape="round"
-            nzDanger
-          >
-            <i nz-icon nzType="poweroff"></i>STOP
-          </button>
-        </nz-space-item>
-      </nz-space>
-    </ul>
-  </nz-header>
   <nz-content>
     <div class="inner-content">
       <div>

@@ -3,3 +3,55 @@
 //   margin-bottom: 12px;
 // }
 
+.divider {
+  width: 5px;
+  height: auto;
+  display: inline-block;
+}
+
+.stop-bttn {
+  border-color: palevioletred;
+  color: palevioletred;
+}
+
+.stop-bttn:hover {
+  color: red;
+  background-color: #fff;
+  border-color: red;
+}
+
+nz-header {
+  width: 100%;
+  z-index: 1;
+}
+nz-header {
+  position: fixed;
+  background: #001529;
+  padding-top: 0%;
+  padding-bottom: 0%;
+  //bottom: 0;
+  //  width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+nz-content {
+  padding: 0 50px;
+  margin-top: 64px;
+}
+
+.inner-content {
+  background: #fff;
+  padding: 24px;
+  min-height: 380px;
+}
+
+nz-button {
+  position: absolute;
+}
+
+nz-progress {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+  }

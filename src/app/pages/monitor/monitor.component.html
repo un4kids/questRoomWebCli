@@ -1,4 +1,52 @@
 <div nz-col></div>
+<nz-divider nzText="Control " nzOrientation="left"></nz-divider>
+<nz-row>
+  <div nz-col nzSpan="6" [nzPush]="2">
+    <button
+      class="start-bttn"
+      nz-button
+      nzType="primary"
+      (click)="loadTwo()"
+      [nzLoading]="isLoadingTwo"
+      nzShape="round"
+    >
+      <i nz-icon nzType="play-circle"></i>START
+    </button>
+  </div>
+
+  <div nz-col nzSpan="6" [nzPush]="2">
+    <button
+      class="pause-bttn"
+      nz-button
+      nzType="primary"
+      (click)="loadTwo()"
+      [nzLoading]="isLoadingTwo"
+      nzShape="round"
+    >
+      <i nz-icon nzType="pause-circle"></i>PAUSE
+    </button>
+  </div>
+
+  <div nz-col nzSpan="6" [nzPush]="2">
+    <button
+      class="stop-bttn"
+      nz-button
+      nzType="dashed"
+      nzDanger
+      (click)="loadTwo()"
+      [nzLoading]="isLoadingTwo"
+      nzShape="round"
+      nzDanger
+    >
+      <i nz-icon nzType="poweroff"></i>STOP
+    </button>
+  </div>
+  <div nz-col nzSpan="6" [nzPush]="2">
+      <nz-progress [nzPercent]="75" nzType="circle" [nzWidth]="80"></nz-progress>
+
+  </div>
+
+</nz-row>
 
 <div nz-col>
   <nz-divider nzText="Monitor" nzOrientation="left"></nz-divider>
@@ -28,7 +76,7 @@
           <ng-template #questMode>
             <button nz-button nzType="primary" [nzSize]="large" nzShape="round">
               <i nz-icon nzType="sisternode"></i>
-              {{item.mode}}
+              {{ item.mode }}
             </button>
           </ng-template>
           <ng-template #questReset>

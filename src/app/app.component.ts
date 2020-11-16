@@ -9,32 +9,16 @@ import { HostListener } from "@angular/core";
 export class AppComponent {
   isCollapsed = false;
 
-  isLoadingOne = false;
-  isLoadingTwo = false;
 
-  screenWidth: number;
-  spaceBetweenBttn: number;
+  // spaceBetweenBttn: number;
 
   constructor() {
-    this.getScreenSize();
+   // this.getScreenSize();
   }
-  @HostListener('window:resize', ['$event'])
-  getScreenSize(event?) {
-    this.spaceBetweenBttn  = Math.round(window.innerWidth / 3) - 100;
-    //= this.screenWidth /3
-    //console.log(this.spaceBetweenBttn);
-  }
-  loadOne(): void {
-    this.isLoadingOne = true;
-    setTimeout(() => {
-      this.isLoadingOne = false;
-    }, 5000);
-  }
-
-  loadTwo(): void {
-    this.isLoadingTwo = true;
-    setTimeout(() => {
-      this.isLoadingTwo = false;
-    }, 5000);
-  }
+  // @HostListener('window:resize', ['$event'])
+  // getScreenSize(event?) {
+  //   this.spaceBetweenBttn  = Math.round(window.innerWidth / 3) - 100;
+  //   //= this.screenWidth /3
+  //   //console.log(this.spaceBetweenBttn);
+  // }
 }
