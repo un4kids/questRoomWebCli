@@ -1,73 +1,44 @@
-<div nz-col>
-  <nz-divider nzText="Controls" nzOrientation="left"></nz-divider>
-  <div nz-row nzJustify="space-around">
-    <div nz-col nzSpan="8" nzPush="2">
-      <button
-        class="start-bttn"
-        nz-button
-        nzType="primary"
-        (click)="loadTwo()"
-        [nzLoading]="isLoadingTwo"
-        nzShape="round"
-      >
-        <i nz-icon nzType="play-circle"></i>START
-      </button>
-    </div>
-    <div nz-col nzSpan="8" nzPush="2">
-      <button
-        class="pause-bttn"
-        nz-button
-        nzType="primary"
-        (click)="loadTwo()"
-        [nzLoading]="isLoadingTwo"
-        nzShape="round"
-      >
-        <i nz-icon nzType="pause-circle"></i>PAUSE
-      </button>
-    </div>
-    <div nz-col nzSpan="8" nzPush="2">
-      <button
-        class="stop-bttn"
-        nz-button
-        nzType="dashed"
-        nzDanger
-        (click)="loadTwo()"
-        [nzLoading]="isLoadingTwo"
-        nzShape="round"
-        nzDanger
-      >
-        <i nz-icon nzType="poweroff"></i>STOP
-      </button>
-    </div>
-  </div>
-</div>
+<div nz-col></div>
 
 <div nz-col>
   <nz-divider nzText="Monitor" nzOrientation="left"></nz-divider>
 
+  <nz-list nzGrid>
+    <div nz-row [nzGutter]="16">
+      <div nz-col [nzSpan]="6" *ngFor="let item of quests">
+        <nz-list-item>
+          <nz-card
+            style="width: 300px; margin-top: 16px"
+            [nzActions]="[questMode, questReset]"
+            [nzLoading]="loading"
+          >
+            <nz-skeleton>
+              <nz-card-meta
+                nzTitle="{{ item.title }}"
+                nzDescription="descriptionTemplate"
+              ></nz-card-meta>
+            </nz-skeleton>
+          </nz-card>
 
-    <nz-list nzGrid>
-      <div nz-row [nzGutter]="16">
-        <div nz-col [nzSpan]="6" *ngFor="let item of quests">
-          <nz-list-item>
-            <nz-card
-              style="width: 300px"
-              nzTitle={{item.title}}
-              [nzExtra]="extraTemplate"
-            >
-              <p>{{ item.id }}</p>
-              <p>{{ item.macId }}</p>
-              <p>Card content</p>
-            </nz-card>
-          </nz-list-item>
-        </div>
+          <ng-template #avatarTemplate>
+            <nz-avatar
+              nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            ></nz-avatar>
+          </ng-template>
+          <ng-template #questMode>
+            <button nz-button nzType="primary" [nzSize]="large" nzShape="round">
+              <i nz-icon nzType="sisternode"></i>
+              {{item.mode}}
+            </button>
+          </ng-template>
+          <ng-template #questReset>
+            <button nz-button nzType="primary" [nzSize]="large" nzShape="round">
+              <i nz-icon nzType="redo"></i>
+              RESET
+            </button>
+          </ng-template>
+        </nz-list-item>
       </div>
-    </nz-list>
- 
-
-  <ng-template #extraTemplate>
-    <a>More</a>
-  </ng-template>
+    </div>
+  </nz-list>
 </div>
-
-

@@ -16,12 +16,15 @@ export class MonitorComponent implements OnInit {
   isLoadingOne = false;
   isLoadingTwo = false;
 
+  loading = true;
+
   constructor(
     private questProviderService: QuestProviderService
   ) { }
 
   ngOnInit() {
     this.quests = this.questProviderService.getQuests();
+    this.loading = false;
   }
 
 

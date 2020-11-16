@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,18 @@ export class AppComponent {
   isLoadingOne = false;
   isLoadingTwo = false;
 
+  screenWidth: number;
+  spaceBetweenBttn: number;
+
+  constructor() {
+    this.getScreenSize();
+  }
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.spaceBetweenBttn  = Math.round(window.innerWidth / 3) - 100;
+    //= this.screenWidth /3
+    //console.log(this.spaceBetweenBttn);
+  }
   loadOne(): void {
     this.isLoadingOne = true;
     setTimeout(() => {

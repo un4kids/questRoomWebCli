@@ -28,9 +28,9 @@
 //   min-height: 280px;
 // }
 
-.layout {
-  min-height: 100vh;
-}
+// .layout {
+//   min-height: 100vh;
+// }
 
 .logo {
   width: 120px;
@@ -59,23 +59,33 @@
 
 
 nz-header {
-  position: sticky;
   width: 100%;
   z-index: 1;
 }
-
-nz-footer {
+nz-header {
   position: fixed;
   background: #001529;
   padding-top: 0%;
   padding-bottom: 0%;
-  bottom: 0;
-  width: 100%;
+  //bottom: 0;
+//  width: 100%;
   text-align: center;
   z-index: 1;
 }
+
+// nz-footer {
+//   position: fixed;
+//   background: #001529;
+//   padding-top: 0%;
+//   padding-bottom: 0%;
+//   bottom: 0;
+// //  width: 100%;
+//   text-align: center;
+//   z-index: 1;
+// }
 [nz-menu] {
-  line-height: 64px;
+  //line-height: 64px;
+  width: 100%;
 }
 
 nz-content {
@@ -93,6 +103,18 @@ nz-breadcrumb {
   min-height: 380px;
 }
 
+nz-menu {
+
+  width: 100%;
+  text-align: center;
+}
+
+nz-button {
+  position: absolute;
+}
+// nz-space {
+//   width: 100%;
+// }
 // nz-footer {
 //   text-align: center;
 // }

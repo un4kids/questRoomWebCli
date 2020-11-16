@@ -13,6 +13,8 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 
 
 
@@ -29,7 +31,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
     NzListModule,
     NzDividerModule,
     NzSpaceModule,
-    NzGridModule
+    NzGridModule,
+    NzIconModule
 
   ],
   declarations: [MonitorComponent],
