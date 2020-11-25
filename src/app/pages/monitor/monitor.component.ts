@@ -11,7 +11,7 @@ import { QuestModel } from 'src/app/quest.model';
 })
 export class MonitorComponent implements OnInit {
 
-  quests: Array<QuestModel> = [];
+  public quests: Array<QuestModel> = [];
 
   isLoadingOne = false;
   isLoadingTwo = false;
@@ -19,27 +19,46 @@ export class MonitorComponent implements OnInit {
   loading = true;
 
   constructor(
-    private questProviderService: QuestProviderService
+    private questProviderService: QuestProviderService,
+
   ) { }
 
   ngOnInit() {
-    this.quests = this.questProviderService.getQuests();
-    this.loading = false;
+    //this.quests = this.questProviderService.getQuests();
+    // console.log(this.questProviderService.getQuests());
+
+    // this.questProviderService.getQuests().subscribe(data => {
+    //   console.log(data); // should be your users.
+    //  // this.users = data.users;
+
+    // }, error => {
+    //   console.log(error); // if api returns and error you will get it here  
+    // });
+
+  //});
+   this.reload();
+
   }
 
+  private async reload() {
+  this.quests = await this.questProviderService.getQuests().toPromise();
 
-  loadOne(): void {
-    this.isLoadingOne = true;
-    setTimeout(() => {
-      this.isLoadingOne = false;
-    }, 5000);
+  this.loading = false;
+}
+
+
+loadOne(): void {
+  this.isLoadingOne = true;
+  setTimeout(() => {
+  this.isLoadingOne = false;
+}, 5000);
   }
 
-  loadTwo(): void {
-    this.isLoadingTwo = true;
-    setTimeout(() => {
-      this.isLoadingTwo = false;
-    }, 5000);
+loadTwo(): void {
+  this.isLoadingTwo = true;
+  setTimeout(() => {
+  this.isLoadingTwo = false;
+}, 5000);
   }
 
 }

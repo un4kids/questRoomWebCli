@@ -1,12 +1,15 @@
-export interface QuestModel {
+export class QuestModel {
     id: number;
-    url: string;
     title: string;
-    mode: string;
-    queueId: number;
-    macId: string;
-    signalStrength: number;
+    mac_addr: string;
+    quest_index: number;
+    created_on: string;
+    updated_on: string;
+
     
 }
 
-    
+// export class QuestHealthCheck {
+//     signalStraight : number;
+//     curentMode: number;
+// }
