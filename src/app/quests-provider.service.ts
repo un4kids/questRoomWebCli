@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class QuestProviderService {
+export class QuestsProviderService {
 
   items: Array<QuestModel> = []
 

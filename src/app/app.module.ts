@@ -24,10 +24,20 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { IMqttServiceOptions, MqttModule } from 'ngx-mqtt';
+import { environment } from 'src/environments/environment';
 
 
 
 registerLocaleData(en);
+
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: environment.mqtt.hostname,
+  port: environment.mqtt.port,
+  path: environment.mqtt.path,
+  username: environment.mqtt.username,
+  password: environment.mqtt.password
+};
 
 @NgModule({
   declarations: [
@@ -44,7 +54,9 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NzButtonModule,
     NzSpaceModule,
-    NzCardModule
+    NzCardModule,
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US },
   {

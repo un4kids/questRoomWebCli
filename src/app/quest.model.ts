@@ -5,11 +5,16 @@ export class QuestModel {
     quest_index: number;
     created_on: string;
     updated_on: string;
-
+    signal_straight : number;
+    mode: number;
     
 }
 
-// export class QuestHealthCheck {
-//     signalStraight : number;
-//     curentMode: number;
-// }
+export class QuestHealthCheck {
+    signal_straight : number;
+    mode: number;
+}
+
+export interface modeInMsg{
+    mode: number;
+}

@@ -5,7 +5,14 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost:5000/api',
-  api_client_token: 'a3a3d109873e7e98971639889bc0b7f2ffcd459b17397af6c73596b91b5faa89'
+  api_client_token: 'a3a3d109873e7e98971639889bc0b7f2ffcd459b17397af6c73596b91b5faa89',
+  mqtt: {
+    hostname: 'localhost',
+    port: 9001,
+    path: '',
+    username: 'miagiUI',
+    password: '2'
+  }
 };
 
 /*

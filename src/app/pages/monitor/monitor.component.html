@@ -1,5 +1,5 @@
 <div nz-col></div>
-<nz-divider nzText="Control " nzOrientation="left"></nz-divider>
+<nz-divider [nzText]="message" nzOrientation="left"></nz-divider>
 <nz-row>
   <div nz-col nzSpan="6" [nzPush]="2">
     <button
@@ -42,10 +42,8 @@
     </button>
   </div>
   <div nz-col nzSpan="6" [nzPush]="2">
-      <nz-progress [nzPercent]="75" nzType="circle" [nzWidth]="80"></nz-progress>
-
+    <nz-progress [nzPercent]="75" nzType="circle" [nzWidth]="80"></nz-progress>
   </div>
-
 </nz-row>
 
 <div nz-col>
@@ -63,7 +61,7 @@
             <nz-skeleton>
               <nz-card-meta
                 nzTitle="{{ item.title }}"
-                nzDescription="descriptionTemplate"
+                [nzDescription]="descriptionTemplate"
               ></nz-card-meta>
             </nz-skeleton>
           </nz-card>
@@ -73,14 +71,18 @@
               nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
             ></nz-avatar>
           </ng-template>
+          <ng-template #descriptionTemplate>
+            Signal straight: {{ item.signal_straight }}
+            Current mode: {{item.mode}}
+          </ng-template>
           <ng-template #questMode>
             <button nz-button nzType="primary" [nzSize]="large" nzShape="round">
               <i nz-icon nzType="sisternode"></i>
-              {{ item.mode }}
+              {{ modeToStr(item.mode) }}
             </button>
           </ng-template>
           <ng-template #questReset>
-            <button nz-button nzType="primary" [nzSize]="large" nzShape="round">
+            <button nz-button nzType="primary" (click)="resetQuest(item.mac_addr)" [nzSize]="large" nzShape="round">
               <i nz-icon nzType="redo"></i>
               RESET
             </button>
