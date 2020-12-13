@@ -9,7 +9,7 @@
   >
     <nz-card-meta
       [nzAvatar]="avatarTemplate"
-      nzTitle="{{quest.title}}"
+      nzTitle="{{quest?.title}} "
       [nzDescription]="descriptionTemplate"
     ></nz-card-meta>
   </nz-skeleton>
@@ -38,5 +38,5 @@
   </button>
 </ng-template>
 <ng-template #descriptionTemplate>
-    Signal streight: {{questHealthCheck.signal_streight}}
+    Signal streight: {{questHealthCheck.signal_straight}}
 </ng-template>

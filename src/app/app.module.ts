@@ -35,6 +35,8 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: environment.mqtt.hostname,
   port: environment.mqtt.port,
   path: environment.mqtt.path,
+  //protocol: 'ws',
+  //rejectUnauthorized: false,
   username: environment.mqtt.username,
   password: environment.mqtt.password
 };

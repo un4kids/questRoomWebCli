@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { QuestModel, QuestHealthCheck, modeInMsg } from '../quest.model';
@@ -14,8 +14,10 @@ export class DeviceDataComponent implements OnInit, OnDestroy {
   public questDataSub: Subscription;
   @Input() readonly quest: QuestModel;
   @Input() loading;
-  public questHealthCheck: QuestHealthCheck = {signal_straight: 0, mode: 0};
+  @Output() currentModeEmiter = new EventEmitter<number>();
+  public questHealthCheck: QuestHealthCheck = { signal_straight: 0, mode: 0 };
   //loading = true;
+  private doneSended: Boolean = false;
 
 
 
@@ -38,10 +40,14 @@ export class DeviceDataComponent implements OnInit, OnDestroy {
 
   private observeQuestData() {
     this.questDataSub = this.questDataService
-      .observeQuestHealthCheck(this.quest.mac_addr)
+      .observeQuestHealthCheck(this.quest?.mac_addr)
       .subscribe(hc => {
         this.questHealthCheck.signal_straight = hc.signal_straight;
         this.questHealthCheck.mode = hc.mode;
+        if (!this.doneSended && hc.mode === 3) {
+          this.currentModeEmiter.emit(hc.mode);
+          this.doneSended = true;
+        }
         console.log(hc);
       }, error => {
         console.log("ERROR: on healthCheck");
@@ -50,19 +56,18 @@ export class DeviceDataComponent implements OnInit, OnDestroy {
       );
   }
 
-  public modeToStr(mode: number)
-  {
-    let outMode:string ="";
-    switch(mode){
-      case 0:{
+  public modeToStr(mode: number) {
+    let outMode: string = "";
+    switch (mode) {
+      case 0: {
         outMode = "INACTIVE"
         break;
       }
-      case 1:{
+      case 1: {
         outMode = "STANBY";
         break;
-      } 
-      case 2:{
+      }
+      case 2: {
         outMode = "DEPLOY";
         break;
       }
@@ -86,12 +91,13 @@ export class DeviceDataComponent implements OnInit, OnDestroy {
     return outMode;
   }
 
-  public resetQuest(macId: string)
-  {
-    let msg: modeInMsg = {mode: 4}
+  public resetQuest(macId: string) {
+    let msg: modeInMsg = { mode: 4 }
     this.questDataService.publishModeToQuest(macId, JSON.stringify(msg));
+    this.doneSended = false;
+    this.currentModeEmiter.emit(0);
   }
 
-  
+
 
 }

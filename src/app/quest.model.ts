@@ -5,8 +5,7 @@ export class QuestModel {
     quest_index: number;
     created_on: string;
     updated_on: string;
-    signal_straight : number;
-    mode: number;
+
     
 }
 
