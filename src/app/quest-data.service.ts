@@ -11,12 +11,13 @@ export class QuestDataService {
   constructor(private readonly mqttService: MqttService
   ) { }
   /**
+     // tslint:disable-next-line: jsdoc-format
      * Generates observable of MessageType instances for a specific topic
      * @param topic mqtt topic
      */
   private observe<MessageType>(topic: string) {
     return this.mqttService.observe(topic).pipe(map((message: IMqttMessage) => {
-      //console.log("PAYLOAD---->", message.payload.toString())
+      // console.log("PAYLOAD---->", message.payload.toString())
       return JSON.parse(message.payload.toString()) as MessageType;
     }, error => {
       console.log(error); // if api returns and error you will get it here  
@@ -25,8 +26,9 @@ export class QuestDataService {
     ));
   }
 
+  // tslint:disable-next-line: typedef
   public observeQuestHealthCheck(mac: string) {
-    //console.log("------------->call abservable")
+    // console.log("------------->call abservable")
     console.log(this.mqttService.clientId)
     return this.observe<QuestHealthCheck>(`ui/quest/${mac}/healthCheck`);
 
@@ -35,19 +37,17 @@ export class QuestDataService {
     console.log(msg);
     this.mqttService.publish(`ui/quest/${mac}/modeIn`, msg)
       .subscribe(res => {
-        console.log("---------------> MQTT RES")
-        console.log(res)
+        console.log('---------------> MQTT RES');
+        console.log(res);
 
       }, error => { 
-        console.log("---------------> MQTT ERROR");
+        console.log('---------------> MQTT ERROR');
         console.log(error);
        },
        () => {
-        console.log("---------------> MQTT COMPLETE")
+        console.log('---------------> MQTT COMPLETE')
 
        }
-
-
       );
   }
 
