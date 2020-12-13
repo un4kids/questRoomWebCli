@@ -1,0 +1,42 @@
+<nz-card
+  style="width: 300px; margin-top: 16px"
+  [nzActions]="[questMode, questReset]"
+>
+  <nz-skeleton
+    [nzActive]="true"
+    [nzLoading]="loading"
+    [nzAvatar]="{ size: 'large' }"
+  >
+    <nz-card-meta
+      [nzAvatar]="avatarTemplate"
+      nzTitle="{{quest.title}}"
+      [nzDescription]="descriptionTemplate"
+    ></nz-card-meta>
+  </nz-skeleton>
+</nz-card>
+<ng-template #avatarTemplate>
+  <nz-avatar
+    nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+  ></nz-avatar>
+</ng-template>
+<ng-template #questMode>
+  <button nz-button nzType="primary" [nzSize]="large" nzShape="round">
+    <i nz-icon nzType="sisternode"></i>
+    {{modeToStr(questHealthCheck.mode)}}
+  </button>
+</ng-template>
+<ng-template #questReset>
+  <button
+    nz-button
+    nzType="primary"
+    (click)="resetQuest(quest.mac_addr)"
+    [nzSize]="large"
+    nzShape="round"
+  >
+    <i nz-icon nzType="redo"></i>
+    RESET
+  </button>
+</ng-template>
+<ng-template #descriptionTemplate>
+    Signal streight: {{questHealthCheck.signal_streight}}
+</ng-template>
