@@ -33,9 +33,9 @@ export class DeviceDataComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.observeQuestData();
-    console.log("DEVICE DATA");
+    console.log('DEVICE DATA');
     console.log(this.quest?.title);
-    console.log(this.loading)
+    console.log(this.loading);
   }
 
   private observeQuestData() {
@@ -50,33 +50,33 @@ export class DeviceDataComponent implements OnInit, OnDestroy {
         }
         console.log(hc);
       }, error => {
-        console.log("ERROR: on healthCheck");
+        console.log('ERROR: on healthCheck');
         console.log(error);
       }
       );
   }
 
   public modeToStr(mode: number) {
-    let outMode: string = "";
+    let outMode: string = '';
     switch (mode) {
       case 0: {
-        outMode = "INACTIVE"
+        outMode = 'INACTIVE'
         break;
       }
       case 1: {
-        outMode = "STANBY";
+        outMode = 'STANBY';
         break;
       }
       case 2: {
-        outMode = "DEPLOY";
+        outMode = 'DEPLOY';
         break;
       }
       case 3: {
-        outMode = "DONE";
+        outMode = 'DONE';
         break;
       }
       case 4: {
-        outMode = "RESET";
+        outMode = 'RESET';
         break;
       }
       // default:

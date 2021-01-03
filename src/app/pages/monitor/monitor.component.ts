@@ -17,8 +17,8 @@ export class MonitorComponent implements OnInit {
   private readonly questCount: number = 12;
 
 
-  isLoadingOne = false;
-  isLoadingTwo = false;
+  isLoadingOne: Boolean = false;
+  isLoadingTwo: Boolean = false;
 
   public loading = true;
 
