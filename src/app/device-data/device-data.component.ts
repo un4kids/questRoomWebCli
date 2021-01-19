@@ -1,8 +1,15 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { QuestModel, QuestHealthCheck, modeInMsg } from '../quest.model';
 import { QuestDataService } from '../quest-data.service'
+
+import {
+  IMqttMessage,
+  MqttModule,
+  IMqttServiceOptions,
+  MqttService
+} from 'ngx-mqtt';
 
 @Component({
   selector: 'app-device-data',
@@ -21,39 +28,59 @@ export class DeviceDataComponent implements OnInit, OnDestroy {
 
 
 
+  // constructor(
+  //   private readonly questDataService: QuestDataService,
+  // ) { }
   constructor(
-    private readonly questDataService: QuestDataService,
-  ) { }
+    private _mqttService: MqttService,
+    //private readonly questDataService: QuestDataService,
+  ) {
+
+  }
   ngOnDestroy(): void {
     //throw new Error('Method not implemented.');
     if (this.questDataSub) {
       this.questDataSub.unsubscribe();
     }
   }
+  public unsafePublish(topic: string, message: string): void {
+    this._mqttService.unsafePublish(topic, message, {qos: 2, retain: false});
+  }
 
   ngOnInit(): void {
     this.observeQuestData();
-    console.log('DEVICE DATA');
-    console.log(this.quest?.title);
-    console.log(this.loading);
+
+    // console.log('DEVICE DATA');
+    // console.log(this.quest?.title);
+    // console.log(this.loading);
   }
 
   private observeQuestData() {
-    this.questDataSub = this.questDataService
-      .observeQuestHealthCheck(this.quest?.mac_addr)
-      .subscribe(hc => {
-        this.questHealthCheck.signal_straight = hc.signal_straight;
-        this.questHealthCheck.mode = hc.mode;
-        if (!this.doneSended && hc.mode === 3) {
-          this.currentModeEmiter.emit(hc.mode);
-          this.doneSended = true;
-        }
-        console.log(hc);
-      }, error => {
-        console.log('ERROR: on healthCheck');
-        console.log(error);
-      }
-      );
+    // this.questDataSub = this.questDataService
+    //   .observeQuestHealthCheck(this.quest?.mac_addr)
+    //   .subscribe(hc => {
+    //     this.questHealthCheck.signal_straight = hc.signal_straight;
+    //     this.questHealthCheck.mode = hc.mode;
+    //     if (!this.doneSended && hc.mode === 3) {
+    //       this.currentModeEmiter.emit(hc.mode);
+    //       this.doneSended = true;
+    //     }
+    //     console.log(hc);
+    //   }, error => {
+    //     console.log('ERROR: on healthCheck');
+    //     console.log(error);
+    //   }
+    //   );
+
+    this.questDataSub = this._mqttService.observe(`ui/quest/${this.quest?.mac_addr}/healthCheck`)
+      .subscribe((message: IMqttMessage) => {
+        // this.message = message.payload.toString();
+        this.questHealthCheck = JSON.parse(message.payload.toString()) as QuestHealthCheck;
+
+        console.log("------------>IN CONSTRUCTOR");
+        console.log(this.quest.mac_addr);
+      });
+    //console.log("------------>IN CONSTRUCTOR");
   }
 
   public modeToStr(mode: number) {
@@ -92,10 +119,25 @@ export class DeviceDataComponent implements OnInit, OnDestroy {
   }
 
   public resetQuest(macId: string) {
-    let msg: modeInMsg = { mode: 4 }
-    this.questDataService.publishModeToQuest(macId, JSON.stringify(msg));
-    this.doneSended = false;
-    this.currentModeEmiter.emit(0);
+    let msg: modeInMsg = { mode: 4 };
+    // this.questDataService.publishModeToQuest(macId, JSON.stringify(msg));
+    // this.doneSended = false;
+     this.currentModeEmiter.emit(0);
+
+    this._mqttService.publish(`ui/quest/${this.quest.mac_addr}/modeIn`, JSON.stringify(msg))
+      .subscribe(res => {
+        console.log('---------------> MQTT RES');
+        console.log(res);
+
+      }, error => {
+        console.log('---------------> MQTT ERROR');
+        console.log(error);
+      },
+        () => {
+          console.log('---------------> MQTT COMPLETE');
+
+        }
+      );
   }
 
 
